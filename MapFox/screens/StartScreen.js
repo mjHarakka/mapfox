@@ -1,12 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import AppHeader from '../components/AppHeader';
+import TopAdventures from '../components/TopAdventures';
 
 const StartScreen =()=> {
     return (
-        <AppHeader/>
-    )
-
+      <View>
+        <AppHeader />
+        <TopAdventures />
+      </View>
+    );
 }
 
 const styles = StyleSheet.create({
