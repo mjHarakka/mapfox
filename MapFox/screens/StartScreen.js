@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import AppHeader from '../components/AppHeader';
 import EmbeddedMap from '../components/EmbeddedMap';
+import TopAdventures from '../components/TopAdventures';
 
 
 const StartScreen =()=> {
@@ -9,10 +10,15 @@ const StartScreen =()=> {
       <View>
         <AppHeader/>
         <EmbeddedMap/>
+        <TopAdventures />
       </View>
         
-    )
+    );
 
+        
+        
+     
+   
 }
 
 const styles = StyleSheet.create({
