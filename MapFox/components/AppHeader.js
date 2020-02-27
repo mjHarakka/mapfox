@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StatusBar, View, Text, Button } from 'react-native';
 
 export default function AppHeader() {
 
 return (
     <View>
+        <StatusBar hidden = {true} />
         <View>
             <Text>Welcome to Mapfox</Text>
         </View>
