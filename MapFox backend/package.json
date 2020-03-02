@@ -1,0 +1,25 @@
+{
+  "name": "mapfox-backend",
+  "version": "1.0.0",
+  "description": "This is the mapfox backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjHarakka/mapfox.git"
+  },
+  "keywords": [
+    "MapFox"
+  ],
+  "author": "Mikko Harakka, Aleksanteri Fagerholm, Olli Eloranta, Noora Eteläniemi, Sanna Arvilommi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mjHarakka/mapfox/issues"
+  },
+  "homepage": "https://github.com/mjHarakka/mapfox#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
