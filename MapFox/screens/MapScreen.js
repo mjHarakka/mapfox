@@ -4,7 +4,7 @@ import MapView, { Marker, Heatmap } from 'react-native-maps';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-export default function App() {
+const MapScreen = () => {
   const [location, setLocation] = useState(null);
   const [markers, setMarkers] = useState([
     {
@@ -40,8 +40,8 @@ export default function App() {
   };
 
   return (
-    <MapView style={{ flex: 1 }}
-      initialRegion={{
+    <MapView 
+        initialRegion={{
         latitude: 60.200692,
         longitude: 24.934302,
         latitudeDelta: 0.0322,
@@ -73,7 +73,7 @@ export default function App() {
       />
     </MapView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -83,3 +83,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default MapScreen;
