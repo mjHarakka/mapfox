@@ -1,10 +1,18 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Alert, Text } from 'react-native';
 
 const AdventureListScreen =()=> {
+
+  const onSelect = () => {
+    Alert.alert("Pasila Tour on map");
+  }
+
     return (
       <View>
-        <Text>List of the aventures</Text>
+          <Text>List of the adventures</Text>
+        <TouchableOpacity onPress={onSelect}>
+          <Text>Pasila Tour</Text>
+          </TouchableOpacity>
       </View>
     );
 }

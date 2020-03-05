@@ -5,7 +5,7 @@ import MapView, { Marker } from 'react-native-maps';
 export default function EmbeddedMap() {
 
 const onPressMap = () => {
-  Alert.alert("mapScreen");
+  Alert.alert("MapScreen with nearest adventures");
 }
 
 return (

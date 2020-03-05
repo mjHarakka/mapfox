@@ -4,7 +4,7 @@ import { StyleSheet, View, Text } from 'react-native';
 const TopAdventures = () => {
     return (
         <View>
-            <Text style={styles.text}>Top adventures - see which are most popular!</Text>
+            <Text style={styles.text}>Top 10 - see which adventures are most popular!</Text>
         </View>
     );
 };
