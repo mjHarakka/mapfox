@@ -1,12 +1,16 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Alert } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 export default function EmbeddedMap() {
 
+const onPressMap = () => {
+  Alert.alert("mapScreen");
+}
+
 return (
-   
     <View style={styles.mapContainer}>
+    <TouchableOpacity onPress={onPressMap}>
     <MapView style={styles.map}
         initialRegion={{
         latitude: 60.200692,
@@ -23,15 +27,14 @@ return (
         title='Haaga-Helia' 
       />
     </MapView>
+    </TouchableOpacity>
     </View>
-    
- 
     );
-
 }
 
 const styles = StyleSheet.create({
     mapContainer: {
+        flex: 1,
         height: 200
     },
     map: {

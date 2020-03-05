@@ -1,26 +1,34 @@
 import React from 'react';
-import { StatusBar, View, StyleSheet } from 'react-native';
+import { StyleSheet, StatusBar, View } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 
-export default function AppHeader() {
+const AppHeader = () => {
 
 return (
-    <View>
+    <View style={styles.container}>
         <StatusBar hidden = {true} />
         <View>
-            <Text h1>Welcome to Mapfox</Text>
+            <Text style={styles.titleText}>Welcome to Mapfox</Text>
         </View>
         <View>
-            <Button title="Create a new adventure?" />
-            <Button title="Seek a new adventure?" />
+        {/* <Button title="Seek a new adventure?" onPress={() => {
+                props.navigation.navigate('AdventureList');
+            }} /> */}
+            <Button title="Create a new adventure?" disabled/>
         </View>
     </View>
- 
     );
 };
-
 const styles = StyleSheet.create({
-    title: {
-
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center'
+    },
+    titleText: {
+        fontSize: 30,
+        color: 'darkblue',
+        fontWeight: 'bold'
     }
 });
+export default AppHeader;

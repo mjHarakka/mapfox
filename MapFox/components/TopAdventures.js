@@ -1,12 +1,22 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
 const TopAdventures = () => {
     return (
         <View>
-            <Text>Top adventures</Text>
+            <Text style={styles.text}>Top adventures - see which are most popular!</Text>
         </View>
     );
 };
-
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+    },
+    text: {
+        fontSize: 20,
+        color: 'darkblue',
+        fontWeight: 'bold'
+    }
+});
 export default TopAdventures;

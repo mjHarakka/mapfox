@@ -1,35 +1,35 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import AppHeader from '../components/AppHeader';
-import MapScreen from '../screens/MapScreen';
+import EmbeddedMap from '../components/EmbeddedMap';
 import TopAdventures from '../components/TopAdventures';
 
 
-const StartScreen =()=> {
-    return (
-      <View>
-        <AppHeader/>
-        <MapScreen />
+const StartScreen =(props) => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.component}>
+        <AppHeader />
+        <Button title="Seek a new adventure?" onPress={() => {
+                props.navigation.navigate('AdventureList');
+            }} />
+      </View>
+      <View style={styles.component}>
+        <EmbeddedMap />
+      </View>
+      <View style={styles.component}>
         <TopAdventures />
       </View>
-        
-    );
-
-        
-        
-     
-   
-}
-
+    </View>
+  );
+};
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
-
-
+  container: {
+    flex: 1
+  },
+  component: {
+    height: '33%'
+  }
+});
 
 export default StartScreen;
