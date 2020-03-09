@@ -5,7 +5,7 @@ const cors = require('kcors');
 const Koa = require('koa');
 const router = require('koa-router')();
 
-const port = process.env.PORT || 9000;
+const port = process.env.PORT || 8080;
 
 
 const mapURI = process.env.MAP_ENDPOINT || 'http://open-api.myhelsinki.fi/v1/places/';
