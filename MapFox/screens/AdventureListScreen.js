@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Alert, Text } from 'react-native';
+import { List,ListItem } from 'react-native-elements'
 
 const AdventureListScreen =()=> {
 
@@ -7,12 +8,33 @@ const AdventureListScreen =()=> {
     Alert.alert("Pasila Tour on map");
   }
 
+  const list = [
+    {
+        name: 'Pasila Tour'
+         
+    }, 
+    {
+      name: 'Sight spotting'
+       
+  }, 
+  ]
+  
+
     return (
       <View>
-          <Text>List of the adventures</Text>
-        <TouchableOpacity onPress={onSelect}>
-          <Text>Pasila Tour</Text>
-          </TouchableOpacity>
+        {
+          list.map((l,i)=> (
+            <ListItem
+              key={i}
+              title={l.name}
+              bottomDivider
+              chevron
+              onPress={()=> onSelect()}
+            />
+          ))
+        }
+        
+        
       </View>
     );
 }
