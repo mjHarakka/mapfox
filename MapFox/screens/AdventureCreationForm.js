@@ -1,10 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import {Text, View, TextInput } from 'react-native';
+
 
 const AdventureCreationForm=()=> {
 
+    const [value, onChangeText] = React.useState('MyAdventure')
+
+
+
     return(
-        <Text>Create an adventure here</Text>
+        <View>
+            <Text>Create an adventure here</Text>
+            <TextInput
+                style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                onChangeText={text => onChangeText(text)}
+                value={value}
+                />
+            
+        </View>
     )
     
 }
