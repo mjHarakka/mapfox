@@ -13,8 +13,9 @@ return (
         <View>
         {/* <Button title="Seek a new adventure?" onPress={() => {
                 props.navigation.navigate('AdventureList');
-            }} /> */}
+            }} /> 
             <Button title="Create a new adventure?" disabled/>
+            */}
         </View>
     </View>
     );

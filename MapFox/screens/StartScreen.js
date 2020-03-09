@@ -10,6 +10,9 @@ const StartScreen =(props) => {
     <View style={styles.container}>
       <View style={styles.component}>
         <AppHeader />
+        <Button title="Create an adventure?" onPress={() => {
+                props.navigation.navigate('AdventureCreationForm');
+            }} />
         <Button title="Seek a new adventure?" onPress={() => {
                 props.navigation.navigate('AdventureList');
             }} />
