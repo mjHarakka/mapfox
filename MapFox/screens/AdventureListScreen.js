@@ -1,12 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Alert, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { List,ListItem } from 'react-native-elements'
 
-const AdventureListScreen =()=> {
-
-  const onSelect = () => {
-    Alert.alert("Pasila Tour on map");
-  }
+const AdventureListScreen =(props)=> {
 
   const list = [
     {
@@ -18,8 +14,6 @@ const AdventureListScreen =()=> {
        
   }, 
   ]
-  
-
     return (
       <View>
         {
@@ -29,15 +23,17 @@ const AdventureListScreen =()=> {
               title={l.name}
               bottomDivider
               chevron
-              onPress={()=> onSelect()}
-            />
+              onPress={()=> {
+                props.navigation.navigate('MapScreen');
+            }} />
           ))
         }
-        
-        
       </View>
     );
-}
+};
+  AdventureListScreen.navigationOptions= {
+    headerTitle: 'Adventure list'
+};
 const styles = StyleSheet.create({
     container: {
       flex: 1,

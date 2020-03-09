@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Button } from 'react-native';
-import AppHeader from '../components/AppHeader';
+import { StyleSheet, View, StatusBar, Button } from 'react-native';
+// import AppHeader from '../components/AppHeader';
 import EmbeddedMap from '../components/EmbeddedMap';
 import TopAdventures from '../components/TopAdventures';
 
@@ -8,15 +8,15 @@ import TopAdventures from '../components/TopAdventures';
 const StartScreen =(props) => {
   return (
     <View style={styles.container}>
-      <View style={styles.component}>
-        <AppHeader />
-        <Button title="Create an adventure?" onPress={() => {
+      <StatusBar hidden = {true} />
+        <View style={styles.component}>
+          <Button title="Create an adventure?" onPress={() => {
                 props.navigation.navigate('AdventureCreationForm');
             }} />
-        <Button title="Seek a new adventure?" onPress={() => {
+          <Button title="Seek a new adventure?" onPress={() => {
                 props.navigation.navigate('AdventureList');
             }} />
-      </View>
+        </View>
       <View style={styles.component}>
         <EmbeddedMap />
       </View>
@@ -26,11 +26,16 @@ const StartScreen =(props) => {
     </View>
   );
 };
+StartScreen.navigationOptions= {
+  headerTitle: 'Welcome to MapFox'
+};
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#ffff'
   },
   component: {
+    justifyContent: 'center',
     height: '33%'
   }
 });

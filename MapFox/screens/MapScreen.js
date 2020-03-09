@@ -40,7 +40,8 @@ const MapScreen = () => {
   };
 
   return (
-    <MapView 
+    <MapView
+        style={{flex: 1}}
         initialRegion={{
         latitude: 60.200692,
         longitude: 24.934302,
@@ -74,14 +75,14 @@ const MapScreen = () => {
     </MapView>
   );
 };
+MapScreen.navigationOptions= {
+  headerTitle: 'Pasila Tour'
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    flex: 1
+  }
 });
 
 export default MapScreen;

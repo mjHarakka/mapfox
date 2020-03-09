@@ -8,7 +8,7 @@ import AdventureCreationForm from '../screens/AdventureCreationForm'
 const Navi= createStackNavigator({
     MainPage: StartScreen,
     AdventureList: AdventureListScreen,
-    Map: MapScreen,
+    MapScreen: MapScreen,
     AdventureCreationForm: AdventureCreationForm
 });
 
