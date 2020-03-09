@@ -1,21 +1,38 @@
 const express = require('express');
-const app = express();
+const fetch = require('node-fetch');
 
-const axios = require('axios');
+const cors = require('kcors');
+const Koa = require('koa');
+const router = require('koa-router')();
 
-const getData = () => {
-	axios.get('http://open-api.myhelsinki.fi/v1/places/').then(response => {
-		console.log(response.data)
-	})
-}
+const port = process.env.PORT || 9000;
 
-console.log(getData)
 
-getData()
+const mapURI = process.env.MAP_ENDPOINT || 'http://open-api.myhelsinki.fi/v1/places/';
 
-app.get('/', (req, res) => {
-    res.send()
-})
 
-app.listen(3000, () => console.log('listening at 3000'));
-app.use(express.static('public'));
+
+const app = new Koa();
+
+app.use(cors());
+
+
+const fetchLocations = async () => {
+	const endpoint = mapURI;
+	const response = await fetch(endpoint);
+	return response ? response.json() : {};
+};
+
+router.get('/api/apidata', async ctx => {
+	const locationData = await fetchLocations();
+	ctx.type = 'application/json; charset=utf-8';
+	ctx.body = locationData.data ? locationData : {};
+});
+
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+app.listen(port);
+
+console.log(`Listening port ${port}`);
+

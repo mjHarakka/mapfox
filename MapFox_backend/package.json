@@ -20,6 +20,12 @@
   },
   "homepage": "https://github.com/mjHarakka/mapfox#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "kcors": "^2.2.2",
+    "koa": "^2.11.0",
+    "koa-router": "^8.0.8",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.2"
   }
 }
