@@ -1,33 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { List,ListItem } from 'react-native-elements'
+import FetchData from '../components/FetchData';
 
 const AdventureListScreen =(props)=> {
+  
 
-  const list = [
-    {
-        name: 'Pasila Tour'
-         
-    }, 
-    {
-      name: 'Sight spotting'
-       
-  }, 
-  ]
     return (
       <View>
-        {
-          list.map((l,i)=> (
-            <ListItem
-              key={i}
-              title={l.name}
-              bottomDivider
-              chevron
-              onPress={()=> {
-                props.navigation.navigate('MapScreen');
-            }} />
-          ))
-        }
+          <FetchData navigation= {props.navigation} />
       </View>
     );
 };
