@@ -4,9 +4,24 @@ import MapView, { Marker, Heatmap } from 'react-native-maps';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-const MapScreen = () => {
+const MapScreen = props => {
   const [location, setLocation] = useState(null);
-  const [markers, setMarkers] = useState([
+  //const [markers, setMarkers] = useState([{}]);
+
+  //console.log('Marker: ', props.navigation.state.params.marker);
+  //setMarkers(props.navigation.state.marker);
+
+  let markers = ([{
+    latlng: {
+      latitude: props.navigation.state.params.marker.latitude, 
+      longitude: props.navigation.state.params.marker.longitude
+    },
+    title: props.navigation.state.params.marker.name
+  }
+  ]);
+
+
+  /*{const [markers, setMarkers] = useState([
     {
       latlng: {latitude: 60.199399, longitude: 24.940549},
       title: 'East West Pub',
@@ -22,7 +37,7 @@ const MapScreen = () => {
       title: 'Musta Härkä',
       description: ''
     },
-  ]);
+  ]);*/
   
   useEffect(() => {
     getLocation();
@@ -40,7 +55,12 @@ const MapScreen = () => {
   };
 
   return (
-    <MapView
+    /*<View>
+    {markers.map((marker, index) => (
+      <Text>Testi: {marker.title}</Text>
+    ))}
+    </View>*/
+   <MapView
         style={{flex: 1}}
         initialRegion={{
         latitude: 60.200692,
