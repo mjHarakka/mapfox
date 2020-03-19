@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, StatusBar, Button } from 'react-native';
+import { StyleSheet, View, StatusBar, Button, Text } from 'react-native';
 // import AppHeader from '../components/AppHeader';
 import EmbeddedMap from '../components/EmbeddedMap';
 import TopAdventures from '../components/TopAdventures';
@@ -10,6 +10,7 @@ const StartScreen =(props) => {
     <View style={styles.container}>
       <StatusBar hidden = {true} />
         <View style={styles.component}>
+          <Text>Welcome to MapFox</Text>
           <Button title="Create an adventure?" onPress={() => {
                 props.navigation.navigate('AdventureCreationForm');
             }} />

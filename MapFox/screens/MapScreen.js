@@ -17,6 +17,7 @@ const MapScreen = props => {
       longitude: props.navigation.state.params.marker.longitude
     },
     title: props.navigation.state.params.marker.name
+    //description: 
   }
   ]);
 
