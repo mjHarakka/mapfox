@@ -6,12 +6,11 @@ import * as Permissions from 'expo-permissions';
 
 const PlainMap = props => {
   const [location, setLocation] = useState(null);
+  const [region, setRegion] = useState();
   const [markers, setMarkers] = useState([{}]);
 
   //console.log('Marker: ', props.navigation.state.params.marker);
-  //setMarkers(props.navigation.state.marker);
-
-  console.log('PlainMap props: ', props);
+  //setMarkers(props.navigation.state.marker)
 
   //let markers = ([{
    // latlng: {
@@ -22,25 +21,6 @@ const PlainMap = props => {
     //description: 
   //}
   //]);
-
-
-  /*{const [markers, setMarkers] = useState([
-    {
-      latlng: {latitude: 60.199399, longitude: 24.940549},
-      title: 'East West Pub',
-      description: ''
-    },
-    {
-      latlng: {latitude: 60.197864, longitude: 24.935757},
-      title: 'Olutravintola Nurkka',
-      description: ''
-    },
-    {
-      latlng: {latitude: 60.196921, longitude: 24.950947},
-      title: 'Musta Härkä',
-      description: ''
-    },
-  ]);*/
   
   useEffect(() => {
     getLocation();
@@ -49,12 +29,25 @@ const PlainMap = props => {
   const getLocation = async() => {
     //Check permission
     let { status } =  await Permissions.askAsync(Permissions.LOCATION);
+    //console.log('PlainMap props: ', props);
     if (status !== 'granted') {
       Alert.alert('No permission to access location');
     } else {
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      let position = await Location.getCurrentPositionAsync({});
+      //console.log('curPosition', Location.getCurrentPositionAsync({}));
+      setLocation(position);
     }
+  };
+
+  const getInitialState = () => {
+    return {
+      region: {
+        latitude: 60.196921,
+        longitude: 24.950947,
+        latitudeDelta: 0.0322,
+        longitudeDelta: 0.0221,
+      },
+    };
   };
 
   return (
@@ -65,12 +58,19 @@ const PlainMap = props => {
     </View>*/
    <MapView
         style={{flex: 1}}
-        initialRegion={{
-        latitude: 60.200692,
-        longitude: 24.934302,
-        latitudeDelta: 0.0322,
-        longitudeDelta: 0.0221,
-      }}>
+        region={region}
+        //onRegionChange={onRegionChange}
+        onPress={e => console.log('###e.nativeEvent: ', e.nativeEvent)}
+        //initialRegion={{}}}
+        //region={{
+            //latitude: location == null ? 0 : location.coords.latitude,
+            //longitude: location == null ? 0 : location.coords.longitude,
+            //latitude: location.coords.latitude,
+            //longitude: location.coords.longitude,
+            //latitudeDelta: 0.0322,
+            //longitudeDelta: 0.0221
+      //}}>
+      >
       <Marker
         coordinate={{
           latitude: location == null ? 0 : location.coords.latitude,

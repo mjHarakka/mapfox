@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 const EmbeddedMap = props => {
@@ -13,14 +13,15 @@ const EmbeddedMap = props => {
 
   return (
     <View style={styles.mapContainer}>
-        <TouchableOpacity onPress={onPressMap} style={{padding: 10, backgroundColor: 'red'}}>
           <MapView style={styles.map}
             initialRegion={{
             latitude: 60.200692,
             longitude: 24.934302,
             latitudeDelta: 0.0322,
             longitudeDelta: 0.0221,
-        }}>
+          }}
+          onPress={onPressMap}
+        >
             <Marker
               coordinate={{
                 latitude: 60.201373,
@@ -30,7 +31,6 @@ const EmbeddedMap = props => {
               title='Haaga-Helia' 
              />
           </MapView>
-        </TouchableOpacity>
     </View>
     );
 }
