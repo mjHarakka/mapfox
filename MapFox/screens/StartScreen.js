@@ -2,21 +2,17 @@ import React from 'react';
 import { StyleSheet, View, StatusBar, Button, Text } from 'react-native';
 // import AppHeader from '../components/AppHeader';
 import EmbeddedMap from '../components/EmbeddedMap';
+import AppHeader from '../components/AppHeader';
 import TopAdventures from '../components/TopAdventures';
 
 
 const StartScreen =(props) => {
   return (
     <View style={styles.container}>
+      {console.log(props)}
       <StatusBar hidden = {true} />
         <View style={styles.component}>
-          <Text>Welcome to MapFox</Text>
-          <Button title="Create an adventure?" onPress={() => {
-                props.navigation.navigate('AdventureCreationForm');
-            }} />
-          <Button title="Seek a new adventure?" onPress={() => {
-                props.navigation.navigate('AdventureList');
-            }} />
+          <AppHeader navigation={props.navigation} />
         </View>
       <View style={styles.component}>
         <EmbeddedMap />

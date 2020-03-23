@@ -1,12 +1,19 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Button, Text } from 'react-native-elements';
+import { StyleSheet, View, Text } from 'react-native';
+import { Button } from 'react-native-elements';
 
-const AppHeader = () => {
+const AppHeader = props => {
 
 return (
     <View style={styles.container}>
-        
+        {console.log(props)}
+        <Text>Welcome to MapFox</Text>
+        <Button title="Create an adventure?" onPress={() => {
+            props.navigation.navigate('AdventureCreationForm');
+        }} />
+        <Button title="Seek a new adventure?" onPress={() => {
+            props.navigation.navigate('AdventureList');
+        }} />
     </View>
     );
 };
