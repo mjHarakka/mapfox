@@ -2,14 +2,16 @@ import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Alert } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
-export default function EmbeddedMap() {
+const EmbeddedMap = props => {
 
-const onPressMap = () => {
-  //Alert.alert("MapScreen with nearest adventures");
-  console.log("MapScreen with nearest adventures");
-}
+  const onPressMap = () => {
+    //Alert.alert("MapScreen with nearest adventures");
+    console.log(props);
+    props.navigation.navigate('PlainMap');
 
-return (
+  }
+
+  return (
     <View style={styles.mapContainer}>
         <TouchableOpacity onPress={onPressMap} style={{padding: 10, backgroundColor: 'red'}}>
           <MapView style={styles.map}
@@ -41,5 +43,7 @@ const styles = StyleSheet.create({
     map: {
         height: 200
     }
-})
+});
+
+export default EmbeddedMap;
 

@@ -15,7 +15,7 @@ const StartScreen =(props) => {
           <AppHeader navigation={props.navigation} />
         </View>
       <View style={styles.component}>
-        <EmbeddedMap />
+        <EmbeddedMap navigation={props.navigation} />
       </View>
       <View style={styles.component}>
         <TopAdventures />

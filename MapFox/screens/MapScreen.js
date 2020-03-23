@@ -11,6 +11,8 @@ const MapScreen = props => {
   //console.log('Marker: ', props.navigation.state.params.marker);
   //setMarkers(props.navigation.state.marker);
 
+  console.log('MapScreen props: ', props);
+
   let markers = ([{
     latlng: {
       latitude: props.navigation.state.params.marker.latitude, 
