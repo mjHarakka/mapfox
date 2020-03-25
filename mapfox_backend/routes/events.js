@@ -13,9 +13,14 @@ router.get('/', async (req, res) => {
         res.json({ message: err })
     }
 });
-
 //add an event
+
+//const place
+
 router.post('/', async (req, res) => {
+    console.log(req.body.places[0].name)
+    console.log(req.body.places)
+
     const event = new Event({
         title: req.body.title,
         description: req.body.description,
@@ -23,13 +28,10 @@ router.post('/', async (req, res) => {
         isEventChildFriendly: req.body.isEventChildFriendly,
         pinCode: req.body.pinCode,
         tags: req.body.tags,
-        places: req.body.places[{
-            name: req.body.name,
-            description: req.body.description,
-            latitude: req.body.latitude,
-            longitude: req.body.longitude
-        }] 
+        places: req.body.places
+        
     });
+    console.log(event.places)
     try {
         const savedEvent = event.save()
         res.json(savedEvent)
@@ -65,7 +67,10 @@ router.patch('/:eventId', async (req, res) => {
     try {
         const updatedEvent = await Event.updateOne(
             { _id: req.params.eventId },
-            { $set: { title: req.body.title } }
+            { $set: {
+                title: req.body.title,
+                description: req.body.description
+            } }
         );
         res.json(updatedEvent);
     } catch (err) {
