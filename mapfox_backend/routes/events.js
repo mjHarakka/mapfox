@@ -19,7 +19,16 @@ router.post('/', async (req, res) => {
     const event = new Event({
         title: req.body.title,
         description: req.body.description,
-        location: req.body.location
+        startingLocation: req.body.startingLocation,
+        isEventChildFriendly: req.body.isEventChildFriendly,
+        pinCode: req.body.pinCode,
+        tags: req.body.tags,
+        places: req.body.places[{
+            name: req.body.name,
+            description: req.body.description,
+            latitude: req.body.latitude,
+            longitude: req.body.longitude
+        }] 
     });
     try {
         const savedEvent = event.save()

@@ -9,10 +9,43 @@ const EventSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    location: {
+    startingLocation: {
+        type: String,
+        required: false
+    },
+    isEventChildFriendly: {
+        type: Boolean,
+        required: false
+    },
+    pinCode: {
         type: Number,
-        required: true
-    }
+        required: false
+    },
+    tags: {
+        type: String,
+        required: false 
+    },
+    places: [
+        {
+            name: {
+                type: String,
+                required: true
+            },
+            description: {
+                type: String,
+                required: false
+            },
+            latitude: {
+                type: Number,
+                required: true
+            },
+            longitude: {
+                type: Number,
+                required: true
+            }
+        }
+    ],
+    required: false
 })
 
 module.exports = mongoose.model('Events', EventSchema);
