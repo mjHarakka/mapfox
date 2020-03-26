@@ -13,7 +13,7 @@ const FetchData = (props) => {
     //]
     
     useEffect(() => 
-      fetchAll()
+      fetchAll(), []
     );
 
     const fetchAll = () => {
@@ -21,8 +21,8 @@ const FetchData = (props) => {
         .then((response) => response.json())
         .then((responseJson) => { 
             setEvents(responseJson);
-            console.log('Events array: ', events);
-            console.log('Event title:', events[0].title);
+            //console.log('Events array: ', events);
+            //console.log('Event title:', events[0].title);
         })
         .catch((error) => { 
           Alert.alert('Error' , error); 
@@ -31,6 +31,24 @@ const FetchData = (props) => {
     
     return ( 
         <View>
+            {
+            events.map((l, i) => (
+                <ListItem
+                key={i}
+                title={l.title}
+                bottomDivider
+                chevron
+                //onPress = {() => {console.log('Pressed')}}
+                onPress={() => {
+                    props.navigation.navigate({ routeName: 'MapScreen', 
+                    //params: {
+                        //marker: place
+                    //}
+                });
+                }}
+            />
+    ))
+}
         </View>
     );
 };
