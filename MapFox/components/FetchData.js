@@ -1,33 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Alert } from 'react-native';
 import { List,ListItem } from 'react-native-elements';
 import MapScreen from '../screens/MapScreen';
 
 const FetchData = (props) => {
 
-    const [place, setPlace] = useState({});
+    const [events, setEvents] = useState([{}]);
     
-    const eventlist = [
-        {name: 'Pasila Tour'},
-        {name: 'Sight spotting'}
-    ]
+    //const eventlist = [
+        //{name: 'Pasila Tour'},
+        //{name: 'Sight spotting'}
+    //]
     
     useEffect(() => 
-      fetchAll(),
-    []);
+      fetchAll()
+    );
 
     const fetchAll = () => {
-        fetch('http://128.199.36.67/api/apidata')
+        fetch('http://128.199.36.67/events')
         .then((response) => response.json())
         .then((responseJson) => { 
-            //console.log(responseJson.data[0].id);
-            setPlace({
-                id: responseJson.data[0].id, 
-                name: responseJson.data[0].name.fi,
-                latitude: responseJson.data[0].location.lat,
-                longitude: responseJson.data[0].location.lon
-            });
-            console.log('Place object: ', place);
+            setEvents(responseJson);
+            console.log('Events array: ', events);
+            console.log('Event title:', events[0].title);
         })
         .catch((error) => { 
           Alert.alert('Error' , error); 
@@ -36,24 +31,6 @@ const FetchData = (props) => {
     
     return ( 
         <View>
-            {
-                eventlist.map((l, i) => (
-                    <ListItem
-                        key={i}
-                        title={l.name}
-                        bottomDivider
-                        chevron
-                        //onPress = {() => {console.log('Pressed')}}
-                        onPress={() => {
-                            props.navigation.navigate({ routeName: 'MapScreen', 
-                            params: {
-                                marker: place
-                            }
-                        });
-                        }}
-                    />
-                ))
-            }
         </View>
     );
 };
