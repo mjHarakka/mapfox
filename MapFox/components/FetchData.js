@@ -40,7 +40,7 @@ const FetchData = (props) => {
                 chevron
                 //onPress = {() => {console.log('Pressed')}}
                 onPress={() => {
-                    props.navigation.navigate({ routeName: 'MapScreen', 
+                    props.navigation.navigate({ routeName: 'EventInfoScreen', 
                     //params: {
                         //marker: place
                     //}

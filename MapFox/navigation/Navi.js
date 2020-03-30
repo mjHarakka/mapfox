@@ -5,13 +5,15 @@ import AdventureListScreen from '../screens/AdventureListScreen';
 import MapScreen from '../screens/MapScreen';
 import AdventureCreationForm from '../screens/AdventureCreationForm';
 import PlainMap from '../screens/PlainMap';
+import EventInfoScreen from '../screens/EventInfoScreen'
 
 const Navi= createStackNavigator({
     MainPage: StartScreen,
     AdventureList: AdventureListScreen,
     MapScreen: MapScreen,
     AdventureCreationForm: AdventureCreationForm,
-    PlainMap: PlainMap
+    PlainMap: PlainMap,
+    EventInfoScreen: EventInfoScreen
 });
 
 export default createAppContainer(Navi);
