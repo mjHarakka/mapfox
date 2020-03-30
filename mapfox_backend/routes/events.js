@@ -5,6 +5,14 @@ const Event = require('../models/Event');
 
 
 //get back all the events
+/*
+router.get('/', (req, res, next) => {
+    Event.find({}, null, {sort: {_id: -1}}, (error, events) => {
+      if (error) return next(error)
+      res.send(events)
+    })
+  })
+*/
 router.get('/', async (req, res) => {
     try {
         const events = await Event.find();
@@ -15,11 +23,7 @@ router.get('/', async (req, res) => {
 });
 //add an event
 
-//const place
-
 router.post('/', async (req, res) => {
-    console.log(req.body.places[0].name)
-    console.log(req.body.places)
 
     const event = new Event({
         title: req.body.title,

@@ -1,32 +1,34 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8000;
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
-
-const MONGO_USERNAME = 'mapfox';
-const MONGO_PASSWORD = 'BlueJeansAreCool!';
-const MONGO_HOSTNAME = '127.0.0.1';
-const MONGO_PORT = '27017';
-const MONGO_DB = 'events';
-
-const mapURI = process.env.MAP_ENDPOINT || 'http://open-api.myhelsinki.fi/v1/places/';
+const logger = require('morgan')
+const errorhandler = require('errorhandler')
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(logger('dev'))
+app.use(errorhandler())
 dotenv.config();
 
-
+console.log(process.env.MONGO_USERNAME)
+const mongo_username = process.env.MONGO_USERNAME
+const mongo_password = process.env.MONGO_PASSWORD
+const mongo_hostname= process.env.MONGO_HOSTNAME
+const mongo_port = process.env.MONGO_PORT
+const mongo_db = process.env.MONGO_DB
 
 //import routes
 const eventsRoute = require('./routes/events')
 
 app.use('/events', eventsRoute);
 
-const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
+// Currently for development only
+// TODO get the 
+const url = process.env.DB_CONNECTION 
 //connect To DB
 mongoose.connect(url,
         {
