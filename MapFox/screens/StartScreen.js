@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View, StatusBar, Button, Text } from 'react-native';
-// import AppHeader from '../components/AppHeader';
 import EmbeddedMap from '../components/EmbeddedMap';
 import AppHeader from '../components/AppHeader';
 import TopAdventures from '../components/TopAdventures';

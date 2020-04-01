@@ -9,9 +9,6 @@ const PlainMap = props => {
   const [region, setRegion] = useState();
   const [markers, setMarkers] = useState([{}]);
 
-  //console.log('Marker: ', props.navigation.state.params.marker);
-  //setMarkers(props.navigation.state.marker)
-
   //let markers = ([{
    // latlng: {
       //latitude: props.navigation.state.params.marker.latitude, 
@@ -27,14 +24,11 @@ const PlainMap = props => {
   });
 
   const getLocation = async() => {
-    //Check permission
     let { status } =  await Permissions.askAsync(Permissions.LOCATION);
-    //console.log('PlainMap props: ', props);
     if (status !== 'granted') {
       Alert.alert('No permission to access location');
     } else {
       let position = await Location.getCurrentPositionAsync({});
-      //console.log('curPosition', Location.getCurrentPositionAsync({}));
       setLocation(position);
     }
   };
@@ -51,11 +45,6 @@ const PlainMap = props => {
   };
 
   return (
-    /*<View>
-    {markers.map((marker, index) => (
-      <Text>Testi: {marker.title}</Text>
-    ))}
-    </View>*/
    <MapView
         style={{flex: 1}}
         region={region}

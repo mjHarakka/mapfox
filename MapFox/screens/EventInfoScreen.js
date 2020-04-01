@@ -11,7 +11,6 @@ const EventInfoScreen = (props) => {
     )
     
 }
-
 EventInfoScreen.navigationOptions= {
     headerTitle: 'Event info'
 };

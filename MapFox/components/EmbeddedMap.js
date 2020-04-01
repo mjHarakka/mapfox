@@ -1,11 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 const EmbeddedMap = props => {
 
   const onPressMap = () => {
-    //Alert.alert("MapScreen with nearest adventures");
     console.log(props);
     props.navigation.navigate('PlainMap');
 
