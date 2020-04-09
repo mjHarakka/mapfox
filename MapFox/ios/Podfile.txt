@@ -1,0 +1,4 @@
+target 'app' do
+    #  ...
+    pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
+  end
