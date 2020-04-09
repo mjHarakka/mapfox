@@ -2,17 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Event = require('../models/Event');
 
-
-
-//get back all the events
-/*
-router.get('/', (req, res, next) => {
-    Event.find({}, null, {sort: {_id: -1}}, (error, events) => {
-      if (error) return next(error)
-      res.send(events)
-    })
-  })
-*/
 router.get('/', async (req, res) => {
     try {
         const events = await Event.find();
