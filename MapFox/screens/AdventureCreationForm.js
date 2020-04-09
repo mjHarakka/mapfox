@@ -5,41 +5,24 @@ import axios from 'axios'
 const SearchForm = (props) => {
     return (
       <View>
-        <Text>Find countries: </Text><TextInput value={props.searchValue} onChange={props.handleSearch} />
+        <TextInput placeHolder={'Etsi kohteita Helsingistä'} value={props.searchValue} onChange={props.handleSearch} />
       </View>
     ) 
-  }
+}
   
-  const CountryView = (props) => {
-    const country = props.country 
-    return (
-      <View>
-      <Text>{country.name}</Text>
-  
-  
-      </View>
-    )
-  }
-  
-  
-  
-  const Countries = (props) => {
-  
-    
+const Places = (props) => {
+
         return (
         
           <View>
-            {props.results.map(result => <Text key={result.alpha3Code} >{result.name}</Text>)}
+            {props.results.map(result => <Text key={result.id} > {result.name.fi}</Text>)}
           </View>
         )
-      
-      
     
 }
-  
 
-const Places = () => {
-    const [countries, setCountries] = React.useState([])
+const PlacesView = () => {
+    const [places, setPlaces] = React.useState([])
     const [searchValue, setSearchValue] = React.useState('')
   
     const handleSearch = (event) => {
@@ -47,24 +30,30 @@ const Places = () => {
       setSearchValue(event.target.value)
     }
   
-    const results = countries.filter(country => country.name.indexOf(searchValue) != -1)
-  
+    // Vanilla React JS:l toimii tää filtteröinti funktio mikä lisää resultseihi placesit jotka mätsää hakutekstin kanssa
+    // TODO: Why won't it work?! Pls fix ( ͡° ͜ʖ ͡°)
+    const results = places.filter(place => place.name.fi.indexOf(searchValue) != -1)
+
+
+
     React.useEffect(() => {
       console.log('effect')
       axios
-        .get('https://restcountries.eu/rest/v2/all')
+        .get('http://open-api.myhelsinki.fi/v1/places/')
         .then(response => {
           console.log('promise fulfilled')
-          setCountries(response.data)
+          setPlaces(response.data.data)
         })
     }, [])
-    console.log('render', countries.length, 'persons')
+
+    console.log('render', places.length, 'places')
+    console.log(places)
   
     return (
 
       <View>
       <SearchForm searchValue={searchValue} handleSearch={handleSearch} />
-      <Countries results={results}/>
+      <Places results={results}/>
       
   
       </View>
@@ -129,6 +118,10 @@ const AdventureCreationForm = () => {
    
 
     return (
+        // TODO Scroll Bar
+        // TODO Joka placesil individual lisäysnappi jolla sen saa tökättyä eventtii
+        // Postaus toimii mut places menee vaa tyhjänä listana backendii koska siihen ei oo logiikkaa atm
+        // Katotaa varmaa näist suurin osa sit yhes
         <View style={styles.container}>
             <Text>Create an adventure here</Text>
             <TextInput
@@ -143,7 +136,9 @@ const AdventureCreationForm = () => {
                 onChangeText={description => setDescription(description)}
                 value={description}
             />
-            <Places />
+            <PlacesView />
+
+            
 
             <Button title={'Press'} onPress={postEventObject}></Button>
 
