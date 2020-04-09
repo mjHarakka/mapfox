@@ -30,7 +30,6 @@ const AdventureCreationForm = () => {
             }]
         }
     
-        
     }
 
     const postEventObject = (event) => {
