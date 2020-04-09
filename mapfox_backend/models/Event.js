@@ -21,12 +21,10 @@ const EventSchema = mongoose.Schema({
         type: Number,
         required: false
     },
-    tags: [{
-        tag: {
-            type: String,
-            required: false 
-        }
-    }],
+    tags: {
+        type: String,
+        required: false 
+    },
     places: [
         {
             name: {
