@@ -3,6 +3,7 @@ import { StyleSheet, View, StatusBar, Button, Text } from 'react-native';
 import EmbeddedMap from '../components/EmbeddedMap';
 import AppHeader from '../components/AppHeader';
 import TopAdventures from '../components/TopAdventures';
+import SignIn from '../components/SignIn';
 
 
 const StartScreen =(props) => {
@@ -15,6 +16,9 @@ const StartScreen =(props) => {
         </View>
       <View style={styles.component}>
         <EmbeddedMap navigation={props.navigation} />
+      </View>
+      <View style={styles.component}>
+        <SignIn />
       </View>
       <View style={styles.component}>
         <TopAdventures />
@@ -32,7 +36,7 @@ const styles = StyleSheet.create({
   },
   component: {
     justifyContent: 'center',
-    height: '33%'
+    height: '25%'
   }
 });
 
