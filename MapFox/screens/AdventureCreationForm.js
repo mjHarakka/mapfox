@@ -6,47 +6,74 @@ import {
     Text,
     TextInput,
     ScrollView,
+    Alert,
 } from "react-native";
 import axios from "axios";
 
 const PlacesView = () => {
-    const [places, setPlaces] = useState([]);
+    const [locations, setLocations] = useState([]);
     const [searchValue, setSearchValue] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-
+    const [places, setPlaces] = useState([]);
 
     useEffect(() => {
         axios.get("http://open-api.myhelsinki.fi/v1/places/").then((response) => {
             console.log("promise fulfilled");
-            setPlaces(response.data.data);
+            setLocations(response.data.data);
         });
     }, []);
 
-
-
     useEffect(() => {
-        const results = places.filter(
-            place => place.name.fi.toLowerCase().includes(searchValue.toLowerCase())
+        const results = locations.filter((location) =>
+            location.name.fi.toLowerCase().includes(searchValue.toLowerCase())
         );
         setSearchResults(results);
     }, [searchValue]);
 
+    const addPlaces = (item) => {
+        const placeObject = {
+            name: item.name.fi,
+            description: item.description.body,
+            latitude: item.location.lat,
+            longitude: item.location.lon,
+        };
+        Alert.alert(
+            "",
+            "Haluatko lisätä kohteen " + item.name.fi + " tapahtumaasi?",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel",
+                },
+                { text: "OK", onPress: () => setPlaces((places) => [...places, placeObject]) },
+            ],
+            { cancelable: false }
+        );
+    };
+
+    const logger = () => {
+        console.log(places);
+    };
 
     return (
         <View style={styles.places}>
-            <View>
+            <View style={styles.inputStyle}>
                 <TextInput
-                    placeHolder={"Etsi kohteita Helsingistä"}
+                    placeholder={"hae paikkoja"}
                     value={searchValue}
-                    onChangeText={searchValue => setSearchValue(searchValue)}
+                    onChangeText={(searchValue) => setSearchValue(searchValue)}
                 />
             </View>
             <ScrollView>
                 <View>
                     {searchResults.map((item) => (
-                        <Text key={item.id}> {item.name.fi}</Text>
+                        <Text onPress={() => addPlaces(item)} key={item.id}>
+                            {" "}
+                            {item.name.fi}
+                        </Text>
                     ))}
                 </View>
+                <Button title={"Press"} onPress={logger}></Button>
             </ScrollView>
         </View>
     );
@@ -55,7 +82,6 @@ const PlacesView = () => {
 const AdventureCreationForm = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [places, setPlaces] = useState("");
 
     const [eventObject, setEventObject] = useState({
         title: "",
@@ -103,8 +129,9 @@ const AdventureCreationForm = () => {
             ],
         };
 
-        axios.post("http://128.199.36.67/events", eventObject).then((response) => {
-        });
+        axios
+            .post("http://128.199.36.67/events", eventObject)
+            .then((response) => { });
     };
 
     return (
@@ -140,14 +167,20 @@ AdventureCreationForm.navigationOptions = {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        flexDirection: "column",
         backgroundColor: "#fff",
     },
     places: {
-        marginTop: 100,
-        padding: 20,
+        height: "30%",
         backgroundColor: "#ccc",
         borderColor: "black",
         borderWidth: 1,
+    },
+    inputStyle: {
+        borderBottomColor: "#000",
+        backgroundColor: "white",
+        borderBottomWidth: 2,
+        color: 'red'
     },
 });
 
