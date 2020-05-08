@@ -1,15 +1,35 @@
 # Mapfox
-Mapfox is a team project during Haaga-Helia's software project II -course 2020
+Mapfox is a team project during Haaga-Helia's software project II -course 2020. 
 
-Mapfox is a full-stack map based mobile application project buid with React Native and Node.js. 
-REST API provided by city of Helsinki is used in this project. 
+We were inspired by map interfaces and wanted to create our own map application, that could be used for actions like creating events, sharing event maps and participating events.
+
+Mapfox is a map based mobile application project build with React Native and Node.js.
+With the application you can:
+* Fetch places from Helsinki API and include selected places to your event
+* Save events
+* Fetch a list of events
+* Select event from a list and see the places included on a map
+
+
+REST API is provided by city of Helsinki is used in this project. 
 
 [http://open-api.myhelsinki.fi/](http://open-api.myhelsinki.fi/)
 
 
 ## Getting Started
 
-To get the application up and running you need to clone or download this project
+### Step 0
+As prequisite to get the application up and running you need to 
+have installed the following:
+* npm
+* expo CLI
+* expo mobile app in your mobile device OR emulator
+
+See detailed Expo documentation from [https://expo.io/](https://expo.io/)
+
+#### Step 1
+
+Clone or download this project
 
 ```bash
 git clone https://github.com/mjHarakka/mapfox
@@ -20,27 +40,24 @@ navigate to MapFox directory
 cd /path to/mapfox
 ```
 run
+
 ```bash
 npm install
 npm start
 ```
-npm start runs expo start automatically.
 
-As prequisite you need to have installed the following:
-    *npm
-    *expo CLI
-    *expo mobile app in your mobile device OR emulator
+#### Step 2
 
-See detailed Expo documentation from [https://expo.io/](https://expo.io/)
+Open app with your mobile device by reading the QR-code from expo CLI console or use emulator
 
 ## Usage
 
 There's separate folders for React Native front-end and Node.js backend.
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Usage of back-end, jump to part Back-end documentation.
 
-Please make sure to update tests as appropriate.
+## Contributing MapFox
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## Authors
 Mikko Harakka, Aleksanteri Fagerholm, Olli Eloranta, Noora Eteläniemi,Sanna Arvilommi
@@ -53,3 +70,43 @@ Thanks to the City of Helsinki for api data.
 Pat on the back for everybody involved.
 
 # Back-end documentation
+Example of vent object:
+
+```Bash
+{
+"title": "My event",
+"description": "City tour",
+"isEventChildFriendly": false,
+"pinCode": 1234,
+"tags": "Linger on the sidewalk",
+"places": 
+[
+	{
+		"name": "Street bar",
+		"description": "good music",
+		"latitude": 60.196764,
+		"longitude": 24.951044
+	},
+	{
+		"name": "Annantalo",
+		"description": "coffee",
+		"latitude": 60.16767501831055,
+		"longitude": 24.934677124023438
+	}
+	
+	
+]
+}
+
+```
+
+Getting one event:
+```Bash
+http//path_to/events
+```
+Geting all events:
+```Bash
+http//path_to/events/{id}
+```
+* Possible operations GET, POST, DELETE 
+* Back-end is deployed in Digital Ocean server. By changin the configuration you can switch to your favorite host.
