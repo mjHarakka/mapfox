@@ -47,7 +47,7 @@ Usage of back-end, jump to part Back-end documentation.
 
 ## Contributing MapFox
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
----
+
 
 # Back-end documentation
 Example of event object:
@@ -96,7 +96,7 @@ Mikko Harakka, Aleksanteri Fagerholm, Olli Eloranta, Noora Eteläniemi,Sanna Arv
 ### Acknowledgements
 Thanks to the City of Helsinki for api data. 
 Pat on the back for everybody involved.
----
+
 ### License
 [MIT](https://choosealicense.com/licenses/mit/)
 
