@@ -1,104 +1,225 @@
-import React from 'react';
-import {StyleSheet, Button, View, Text, TextInput } from 'react-native';
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import {
+    StyleSheet,
+    View,
+    TextInput,
+    ScrollView,
+    Alert,
+    TouchableNativeFeedback,
+} from "react-native";
+import axios from "axios";
+import { Input, Button, Text } from 'react-native-elements';
+import { FlatList } from "react-native-gesture-handler";
 
 const AdventureCreationForm = () => {
+    const [locations, setLocations] = useState([]);
+    const [searchValue, setSearchValue] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [places, setPlaces] = useState([]);
 
-    const [eventObject, setEventObject] = React.useState({
-        title: '',
-        description: '',
-        places: [{
-            name: '',
-            latitude: 0.0,
-            longitude: 0.0
-        }]
-    })
+    useEffect(() => {
+        axios.get("http://open-api.myhelsinki.fi/v1/places/").then((response) => {
+            console.log("promise fulfilled");
+            setLocations(response.data.data);
+        });
+    }, []);
 
-    const handleChange = (event) => {
-        setEventObject({ ...eventObject, [event.target.name]: event.target.value })
-    }
+    useEffect(() => {
+        const results = locations.filter((location) =>
+            location.name.fi.toLowerCase().includes(searchValue.toLowerCase())
+        );
+        setSearchResults(results);
+    }, [searchValue]);
 
-    const addEventObject = (event) => {
-        event.preventDefault()
-        const eventObject = {
-            title: newTitle,
-            description: newDescription,
-            places: [{
-                newName: '',
-                newLatitude: 0.0,
-                newLongitude: 0.0
-            }]
-        }
-    
-        
+    const addPlaces = (item) => {
+        const placeObject = {
+            name: item.name.fi,
+            description: item.description.body,
+            latitude: item.location.lat,
+            longitude: item.location.lon,
+        };
+        Alert.alert(
+            "",
+            "Haluatko lisätä kohteen " + item.name.fi + " tapahtumaasi?",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel",
+                },
+                { text: "OK", onPress: () => setPlaces((places) => [...places, placeObject]) },
+            ],
+            { cancelable: false }
+        );
+    };
+
+    const deletePlace = (item) => {
+        const updatedPlaces = [...places];
+        updatedPlaces.splice(item, 1);
+        Alert.alert(
+            "",
+            "Haluatko poistaa kohteen " + item.name + "?",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel",
+                },
+                { text: "OK", onPress: () => setPlaces(updatedPlaces) },
+            ],
+            { cancelable: false }
+        );
+        console.log(places, 'yks paikka')
     }
 
     const postEventObject = (event) => {
-        event.preventDefault
-    
+        event.preventDefault;
+
         const eventObject = {
-            title: 'a',
-            description: 'a',
-            places: [{
-                name: 'b',
-                latitude: 0.0,
-                longitude: 0.0
-            }]
-        }
+            title: title,
+            description: description,
+            places: places
+        };
 
-        axios
-        .post('http://128.199.36.67/events', eventObject)
-        .then(response => {
-            console.log(response)
-        })
-    }
+        Alert.alert(
+            "",
+            "Haluatko varmasti luoda tapahtuman " + title + "?",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel",
+                },
+                {
+                    text: "OK", onPress: () => axios
+                        .post("http://128.199.36.67/events", eventObject)
+                        .then((response) => { })
+                },
+            ],
+            { cancelable: false }
+        );
 
-    /*
-    const postEventObject = () => fetch('http://128.199.36.67/events', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            title: 'a',
-            description: 'a',
-            places: [{
-                name: 'a',
-                latitude: 0.0,
-                longitude: 0.0
-            }]
-        }) 
-        .catch(err => console.error(err))
-        
-    })
-    */
-   
+
+    };
+
+    const listSeparator = () => {
+        return (
+            <View
+                style={{
+                    height: 5,
+                    width: "100%",
+                    backgroundColor: "#fff",
+                }}
+            />
+        );
+    };
+
     return (
         <View style={styles.container}>
-            <Text>Create an adventure here</Text>
-            {/*
-            <TextInput
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                onChangeText={text => onChangeText(text)}
-                value={value}
+            <Text>Luo uusi tapahtuma</Text>
+            <View style={styles.inputs}>
+                <Input
+                    label={"Tapahtuman nimi"}
+                    placeholder={"Valitse tapahtumallesi nimi"}
+                    onChangeText={(title) => setTitle(title)}
+                    value={title}
                 />
-            */}
-            <Button title={'Press'} onPress={postEventObject}></Button>
+                <Input
+                    label={"Kuvaus tapahtumasta"}
+                    placeholder={"Kirjoita kuvaus tapahtumasta"}
+                    style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                    onChangeText={(description) => setDescription(description)}
+                    value={description}
+                />
 
+            </View>
+            <View style={styles.places}>
+                <View style={styles.inputStyle}>
+                    <Input
+                        label={"Tapahtumasi sijainnit"}
+                        placeholder={"Hae paikkoja tapahtumaasi"}
+                        value={searchValue}
+                        onChangeText={(searchValue) => setSearchValue(searchValue)}
+                    />
+                </View>
+                <ScrollView>
+                    <View>
+                        {searchResults.map((item) => (
+                            <Text style={{ fontSize: 18 }} onPress={() => addPlaces(item)} key={item.id}>
+                                {" "}
+                                {item.name.fi}
+                            </Text>
+                        ))}
+                    </View>
+                </ScrollView>
+            </View>
+            <Text h4>Valitut paikat tapahtumaasi</Text>
+            <View style={styles.listContainer}>
+                <FlatList
+                    ItemSeparatorComponent={listSeparator}
+                    data={places}
+                    keyExtractor={(item) => item.name}
+                    renderItem={(itemData) => <View style={styles.listItem}>
+                        <Text style={{ fontSize: 18 }}>{itemData.item.name}</Text><Text style={styles.deleteText} color='red' onPress={() => deletePlace(itemData.item)}> Poista</Text>
+                    </View>
+                    }
+                />
+            </View>
+            <View style={styles.button}>
+                <Button disabled={title.length === 0 || description.length === 0 || places.length === 0} title={"Luo uusi tapahtuma"} onPress={postEventObject}></Button>
+            </View>
         </View>
     );
 };
 
 
-AdventureCreationForm.navigationOptions= {
-    headerTitle: 'My adventures'
-  };
+
+AdventureCreationForm.navigationOptions = {
+    headerTitle: "New adventure",
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff'
+        flexDirection: "column",
+        backgroundColor: "#fff",
+        margin: 10,
+    },
+    inputs: {
+        borderRadius: 2,
+        alignContent: 'center',
+        marginBottom: 10,
+    },
+    places: {
+        height: "30%",
+        backgroundColor: "#ccc",
+        borderColor: "black",
+        borderWidth: 1,
+    },
+    button: {
+        margin: 10,
+
+    },
+    inputStyle: {
+        borderBottomColor: "#000",
+        backgroundColor: "white",
+        borderBottomWidth: 2,
+        color: 'red'
+    },
+    listContainer: {
+        height: "20%",
+        backgroundColor: "#ccc",
+        borderWidth: 1,
+    },
+    listItem: {
+        flexDirection: "row",
+    },
+    deleteText: {
+        marginLeft: 10,
+        fontSize: 18,
+        color: '#C70039',
+        borderColor: 'black',
+        borderWidth: 1,
+        borderRadius: 10,
     }
 });
 
