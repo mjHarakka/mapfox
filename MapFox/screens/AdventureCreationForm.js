@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import {
     StyleSheet,
-    Button,
     View,
-    Text,
     TextInput,
     ScrollView,
     Alert,
+    TouchableNativeFeedback,
 } from "react-native";
 import axios from "axios";
+import { Input, Button, Text } from 'react-native-elements';
+import { FlatList } from "react-native-gesture-handler";
 
 const AdventureCreationForm = () => {
     const [locations, setLocations] = useState([]);
@@ -53,6 +54,24 @@ const AdventureCreationForm = () => {
         );
     };
 
+    const deletePlace = (item) => {
+        const updatedPlaces = [...places];
+        updatedPlaces.splice(item, 1);
+        Alert.alert(
+            "",
+            "Haluatko poistaa kohteen " + item.name + "?",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel",
+                },
+                { text: "OK", onPress: () => setPlaces(updatedPlaces) },
+            ],
+            { cancelable: false }
+        );
+        console.log(places, 'yks paikka')
+    }
+
     const postEventObject = (event) => {
         event.preventDefault;
 
@@ -62,36 +81,62 @@ const AdventureCreationForm = () => {
             places: places
         };
 
-        axios
-            .post("http://128.199.36.67/events", eventObject)
-            .then((response) => { });
+        Alert.alert(
+            "",
+            "Haluatko varmasti luoda tapahtuman " + title + "?",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel",
+                },
+                {
+                    text: "OK", onPress: () => axios
+                        .post("http://128.199.36.67/events", eventObject)
+                        .then((response) => { })
+                },
+            ],
+            { cancelable: false }
+        );
+
+
     };
 
-    const logger = () => {
-        console.log(places);
+    const listSeparator = () => {
+        return (
+            <View
+                style={{
+                    height: 5,
+                    width: "100%",
+                    backgroundColor: "#fff",
+                }}
+            />
+        );
     };
 
     return (
         <View style={styles.container}>
-            <Text>Create an adventure here</Text>
-            <TextInput
-                placeholder={"Otsikko"}
-                style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-                onChangeText={(title) => setTitle(title)}
-                value={title}
-            />
-            <TextInput
-                placeholder={"Kuvaus tapahtumasta"}
-                style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-                onChangeText={(description) => setDescription(description)}
-                value={description}
-            />
+            <Text>Luo uusi tapahtuma</Text>
+            <View style={styles.inputs}>
+                <Input
+                    label={"Tapahtuman nimi"}
+                    placeholder={"Valitse tapahtumallesi nimi"}
+                    onChangeText={(title) => setTitle(title)}
+                    value={title}
+                />
+                <Input
+                    label={"Kuvaus tapahtumasta"}
+                    placeholder={"Kirjoita kuvaus tapahtumasta"}
+                    style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                    onChangeText={(description) => setDescription(description)}
+                    value={description}
+                />
 
-
+            </View>
             <View style={styles.places}>
                 <View style={styles.inputStyle}>
-                    <TextInput
-                        placeholder={"hae paikkoja"}
+                    <Input
+                        label={"Tapahtumasi sijainnit"}
+                        placeholder={"Hae paikkoja tapahtumaasi"}
                         value={searchValue}
                         onChangeText={(searchValue) => setSearchValue(searchValue)}
                     />
@@ -99,7 +144,7 @@ const AdventureCreationForm = () => {
                 <ScrollView>
                     <View>
                         {searchResults.map((item) => (
-                            <Text onPress={() => addPlaces(item)} key={item.id}>
+                            <Text style={{ fontSize: 18 }} onPress={() => addPlaces(item)} key={item.id}>
                                 {" "}
                                 {item.name.fi}
                             </Text>
@@ -107,7 +152,21 @@ const AdventureCreationForm = () => {
                     </View>
                 </ScrollView>
             </View>
-            <Button title={"Press"} onPress={postEventObject}></Button>
+            <Text h4>Valitut paikat tapahtumaasi</Text>
+            <View style={styles.listContainer}>
+                <FlatList
+                    ItemSeparatorComponent={listSeparator}
+                    data={places}
+                    keyExtractor={(item) => item.name}
+                    renderItem={(itemData) => <View style={styles.listItem}>
+                        <Text style={{ fontSize: 18 }}>{itemData.item.name}</Text><Text style={styles.deleteText} color='red' onPress={() => deletePlace(itemData.item)}> Poista</Text>
+                    </View>
+                    }
+                />
+            </View>
+            <View style={styles.button}>
+                <Button disabled={title.length === 0 || description.length === 0 || places.length === 0} title={"Luo uusi tapahtuma"} onPress={postEventObject}></Button>
+            </View>
         </View>
     );
 };
@@ -115,7 +174,7 @@ const AdventureCreationForm = () => {
 
 
 AdventureCreationForm.navigationOptions = {
-    headerTitle: "My adventures",
+    headerTitle: "New adventure",
 };
 
 const styles = StyleSheet.create({
@@ -123,6 +182,12 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "column",
         backgroundColor: "#fff",
+        margin: 10,
+    },
+    inputs: {
+        borderRadius: 2,
+        alignContent: 'center',
+        marginBottom: 10,
     },
     places: {
         height: "30%",
@@ -130,12 +195,32 @@ const styles = StyleSheet.create({
         borderColor: "black",
         borderWidth: 1,
     },
+    button: {
+        margin: 10,
+
+    },
     inputStyle: {
         borderBottomColor: "#000",
         backgroundColor: "white",
         borderBottomWidth: 2,
         color: 'red'
     },
+    listContainer: {
+        height: "20%",
+        backgroundColor: "#ccc",
+        borderWidth: 1,
+    },
+    listItem: {
+        flexDirection: "row",
+    },
+    deleteText: {
+        marginLeft: 10,
+        fontSize: 18,
+        color: '#C70039',
+        borderColor: 'black',
+        borderWidth: 1,
+        borderRadius: 10,
+    }
 });
 
 export default AdventureCreationForm;
