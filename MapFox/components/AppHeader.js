@@ -1,31 +1,36 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { Button } from 'react-native-elements';
+import { StyleSheet, View, Text, Button } from 'react-native';
+import { colors } from 'react-native-elements';
+import Colors from '../constants/Colors';
 
 const AppHeader = props => {
 
-return (
-    <View style={styles.container}>
-        {console.log(props)}
-        <Text>Welcome to MapFox</Text>
-        <Button title="Create an adventure?" onPress={() => {
-            props.navigation.navigate('AdventureCreationForm');
-        }} />
-        <Button title="Seek a new adventure?" onPress={() => {
-            props.navigation.navigate('AdventureList');
-        }} />
-    </View>
+    return (
+        <View style={styles.container}>
+            <View style={styles.buttonArea}>
+                <Button color={Colors.secondaryOrange} title="Create an adventure?" onPress={() => {
+                    props.navigation.navigate('AdventureCreationForm');
+                }} />
+                <Button color={Colors.secondaryOrange} title="Seek a new adventure?" onPress={() => {
+                    props.navigation.navigate('AdventureList');
+                }} />
+            </View>
+        </View>
     );
 };
-AppHeader.navigationOptions= {
+AppHeader.navigationOptions = {
     headerTitle: 'Welcome to MapFox'
-  };
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center'
-    }
+        backgroundColor: Colors.secondaryBlue,
+    },
+    buttonArea: {
+        margin: 20,
+        flexDirection: 'row',
+        justifyContent: "space-between",
+    },
 });
 export default AppHeader;

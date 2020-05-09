@@ -1,26 +1,28 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import FetchData from '../components/FetchData';
 
-const AdventureListScreen =(props)=> {
-  
+const AdventureListScreen = (props) => {
 
-    return (
-      <View>
-          <FetchData navigation= {props.navigation} />
-      </View>
-    );
+
+  return (
+    <View>
+      <ScrollView>
+        <FetchData navigation={props.navigation} />
+      </ScrollView>
+    </View >
+  );
 };
-  AdventureListScreen.navigationOptions= {
-    headerTitle: 'Adventure list'
+AdventureListScreen.navigationOptions = {
+  headerTitle: 'Adventure list'
 };
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 export default AdventureListScreen;

@@ -1,21 +1,21 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import Colors from '../constants/Colors'
 
 const TopAdventures = () => {
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={styles.text}>See which adventures are most popular!</Text>
         </View>
     );
 };
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
+        alignItems: 'center'
     },
     text: {
         fontSize: 20,
-        color: 'darkblue',
+        color: Colors.secondaryOrange,
         fontWeight: 'bold'
     }
 });

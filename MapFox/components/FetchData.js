@@ -6,42 +6,43 @@ import MapScreen from '../screens/MapScreen';
 const FetchData = (props) => {
 
     const [events, setEvents] = useState([{}]);
-    
-    useEffect(() => 
-      fetchAll(), []
-    );
+
 
     const fetchAll = () => {
         fetch('http://128.199.36.67/events')
-        .then((response) => response.json())
-        .then((responseJson) => { 
-            setEvents(responseJson);
-            //console.log('Events array: ', events);
-        })
-        .catch((error) => { 
-          Alert.alert('Error' , error); 
-        });
-      }
-    
-    return ( 
+            .then((response) => response.json())
+            .then((responseJson) => {
+                setEvents(responseJson);
+                //console.log('Events array: ', events);
+            })
+            .catch((error) => {
+                Alert.alert('Error', error);
+            });
+    }
+    useEffect(() =>
+        fetchAll(), []
+    );
+
+    return (
         <View>
             {
-            events.map((l, i) => (
-                <ListItem
-                key={i}
-                title={l.title}
-                bottomDivider
-                chevron
-                onPress={() => {
-                    props.navigation.navigate({ routeName: 'EventInfoScreen', 
-                    //params: {
-                        //marker: place
-                    //}
-                });
-                }}
-            />
-    ))
-}
+                events.map((l, i) => (
+                    <ListItem
+                        key={i}
+                        title={l.title}
+                        bottomDivider
+                        chevron
+                        onPress={() => {
+                            props.navigation.navigate('EventInfoScreen',
+                                {
+                                    title: l.title,
+                                    description: l.description,
+                                    places: l.places
+                                });
+                        }}
+                    />
+                ))
+            }
         </View>
     );
 };
