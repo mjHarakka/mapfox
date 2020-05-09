@@ -22,7 +22,7 @@ const AdventureCreationForm = () => {
 
     useEffect(() => {
         axios.get("http://open-api.myhelsinki.fi/v1/places/").then((response) => {
-            console.log("promise fulfilled");
+            //console.log("promise fulfilled");
             setLocations(response.data.data);
         });
     }, []);

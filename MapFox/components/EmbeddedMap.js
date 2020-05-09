@@ -5,7 +5,7 @@ import MapView, { Marker } from 'react-native-maps';
 const EmbeddedMap = props => {
 
   const onPressMap = () => {
-    console.log(props);
+    //console.log(props);
     props.navigation.navigate('PlainMap');
 
   }

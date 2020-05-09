@@ -9,7 +9,7 @@ import Colors from '../constants/Colors'
 const StartScreen = (props) => {
   return (
     <View style={styles.container}>
-      {console.log(props)}
+      {/*console.log(props)*/}
       <StatusBar hidden={true} />
       <View style={styles.appHeader}>
         <AppHeader navigation={props.navigation} />
@@ -29,7 +29,7 @@ StartScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primaryBlue
+    backgroundColor: Colors.secondaryBlue
   },
   mapView: {
     justifyContent: 'center',

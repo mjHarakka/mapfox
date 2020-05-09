@@ -7,7 +7,6 @@ const AppHeader = props => {
 
     return (
         <View style={styles.container}>
-            {console.log(props)}
             <View style={styles.buttonArea}>
                 <Button color={Colors.secondaryOrange} title="Create an adventure?" onPress={() => {
                     props.navigation.navigate('AdventureCreationForm');
@@ -26,7 +25,7 @@ AppHeader.navigationOptions = {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.primaryBlue,
+        backgroundColor: Colors.secondaryBlue,
     },
     buttonArea: {
         margin: 20,

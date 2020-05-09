@@ -33,12 +33,12 @@ const FetchData = (props) => {
                         bottomDivider
                         chevron
                         onPress={() => {
-                            props.navigation.navigate({
-                                routeName: 'EventInfoScreen',
-                                //params: {
-                                //marker: place
-                                //}
-                            });
+                            props.navigation.navigate('EventInfoScreen',
+                                {
+                                    title: l.title,
+                                    description: l.description,
+                                    places: l.places
+                                });
                         }}
                     />
                 ))
