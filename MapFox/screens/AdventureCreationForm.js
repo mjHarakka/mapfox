@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import { Input, Button, Text } from 'react-native-elements';
 import { FlatList } from "react-native-gesture-handler";
+import Colors from '../constants/Colors'
 
 const AdventureCreationForm = () => {
     const [locations, setLocations] = useState([]);
@@ -42,7 +43,7 @@ const AdventureCreationForm = () => {
         };
         Alert.alert(
             "",
-            "Haluatko lisätä kohteen " + item.name.fi + " tapahtumaasi?",
+            "Do you want to add " + item.name.fi + " in to your event?",
             [
                 {
                     text: "Cancel",
@@ -59,7 +60,7 @@ const AdventureCreationForm = () => {
         updatedPlaces.splice(item, 1);
         Alert.alert(
             "",
-            "Haluatko poistaa kohteen " + item.name + "?",
+            "Are you sure you want to remove " + item.name + " from your event?",
             [
                 {
                     text: "Cancel",
@@ -69,7 +70,6 @@ const AdventureCreationForm = () => {
             ],
             { cancelable: false }
         );
-        console.log(places, 'yks paikka')
     }
 
     const postEventObject = (event) => {
@@ -83,7 +83,7 @@ const AdventureCreationForm = () => {
 
         Alert.alert(
             "",
-            "Haluatko varmasti luoda tapahtuman " + title + "?",
+            "Are you sure you want to create the event " + title + "?",
             [
                 {
                     text: "Cancel",
@@ -115,17 +115,16 @@ const AdventureCreationForm = () => {
 
     return (
         <View style={styles.container}>
-            <Text>Luo uusi tapahtuma</Text>
             <View style={styles.inputs}>
                 <Input
-                    label={"Tapahtuman nimi"}
-                    placeholder={"Valitse tapahtumallesi nimi"}
+                    label={"Title of your event"}
+                    placeholder={"Choose a title"}
                     onChangeText={(title) => setTitle(title)}
                     value={title}
                 />
                 <Input
-                    label={"Kuvaus tapahtumasta"}
-                    placeholder={"Kirjoita kuvaus tapahtumasta"}
+                    label={"Descrtiption of your event"}
+                    placeholder={"Write the description of your event"}
                     style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
                     onChangeText={(description) => setDescription(description)}
                     value={description}
@@ -135,8 +134,8 @@ const AdventureCreationForm = () => {
             <View style={styles.places}>
                 <View style={styles.inputStyle}>
                     <Input
-                        label={"Tapahtumasi sijainnit"}
-                        placeholder={"Hae paikkoja tapahtumaasi"}
+                        label={"Places for your event"}
+                        placeholder={"Search for different places"}
                         value={searchValue}
                         onChangeText={(searchValue) => setSearchValue(searchValue)}
                     />
@@ -152,7 +151,7 @@ const AdventureCreationForm = () => {
                     </View>
                 </ScrollView>
             </View>
-            <Text h4>Valitut paikat tapahtumaasi</Text>
+            <Text h4>Places in my event</Text>
             <View style={styles.listContainer}>
                 <FlatList
                     ItemSeparatorComponent={listSeparator}
@@ -165,7 +164,7 @@ const AdventureCreationForm = () => {
                 />
             </View>
             <View style={styles.button}>
-                <Button disabled={title.length === 0 || description.length === 0 || places.length === 0} title={"Luo uusi tapahtuma"} onPress={postEventObject}></Button>
+                <Button disabled={title.length === 0 || description.length === 0 || places.length === 0} title={"Create new adventure"} onPress={postEventObject}></Button>
             </View>
         </View>
     );
@@ -174,7 +173,7 @@ const AdventureCreationForm = () => {
 
 
 AdventureCreationForm.navigationOptions = {
-    headerTitle: "New adventure",
+    headerTitle: "Create an adventure",
 };
 
 const styles = StyleSheet.create({
@@ -182,7 +181,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "column",
         backgroundColor: "#fff",
-        margin: 10,
+        margin: 4,
     },
     inputs: {
         borderRadius: 2,
@@ -200,10 +199,8 @@ const styles = StyleSheet.create({
 
     },
     inputStyle: {
-        borderBottomColor: "#000",
         backgroundColor: "white",
-        borderBottomWidth: 2,
-        color: 'red'
+
     },
     listContainer: {
         height: "20%",
