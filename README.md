@@ -65,6 +65,8 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 # Back-end documentation
 
+The backend is built on Node JS alongside with MongoDB as the database, the backend is running on a Linux Ubuntu server. For development you only need to have the node JS installed locally and currently there is no API for testing on our server so it is advisable to use local MongoDB installation.
+
 Example of event object:
 
 ```Bash
@@ -232,7 +234,20 @@ For deleting you only need to give the id in the post message that you want to d
 For the update you need to supply the id and all the fields you wish to update with the updated values
 
 - All possible operations GET, POST, DELETE, UPDATE
-- Back-end is deployed in Digital Ocean server. By changin the configuration you can switch to your favorite host.
+
+### Roadmap
+See the open issues for a list of proposed features (and known issues).
+
+### Contributing
+This is an open source project licensed under MIT.
+
+Fork the Project
+Create your Feature Branch (git checkout -b feature/AmazingFeature)
+Commit your Changes (git commit -m 'Add some AmazingFeature')
+Push to the Branch (git push origin feature/AmazingFeature)
+Open a Pull Request
+
+If a pull requested is merged into the master then it will pushed into production. There are currently only few people who have the root access and/or user setup on our server but if needed and it is someone we would trust it would be possible to grant someone non-root access to the server.
 
 ### Authors
 
