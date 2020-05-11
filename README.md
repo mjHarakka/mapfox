@@ -241,11 +241,12 @@ See the open issues for a list of proposed features (and known issues).
 ### Contributing
 This is an open source project licensed under MIT.
 
-Fork the Project
-Create your Feature Branch (git checkout -b feature/AmazingFeature)
-Commit your Changes (git commit -m 'Add some AmazingFeature')
-Push to the Branch (git push origin feature/AmazingFeature)
-Open a Pull Request
+- Fork the Project
+- Create your Feature Branch
+- Commit your Changes
+- Push to the Branch
+- Open a Pull Request
+
 
 If a pull requested is merged into the master then it will pushed into production. There are currently only few people who have the root access and/or user setup on our server but if needed and it is someone we would trust it would be possible to grant someone non-root access to the server.
 
