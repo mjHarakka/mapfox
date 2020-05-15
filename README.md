@@ -1,5 +1,9 @@
 # Mapfox
 
+<img src="https://raw.githubusercontent.com/mjHarakka/mapfox/master/mapfox_pictures/mapfox%20mainscreen.png" width="200px" > <img src="https://raw.githubusercontent.com/mjHarakka/mapfox/master/mapfox_pictures/mapfox%20event%20creation.png" width="200px" > <img src="https://raw.githubusercontent.com/mjHarakka/mapfox/master/mapfox_pictures/mapfox%20event%20info%20screen.png" width="200px" >
+
+
+
 Mapfox is a team project during Haaga-Helia's software project II -course 2020.
 
 We were inspired by map interfaces and wanted to create our own map application, that could be used for actions like creating events, sharing event maps and participating events.
@@ -16,7 +20,17 @@ With the application you can:
 REST API provided by city of Helsinki is used in this project.
 [http://open-api.myhelsinki.fi/](http://open-api.myhelsinki.fi/)
 
-## Getting Started
+## Folder structure
+
+There are separate folders for the front-end with and backend.
+The folder structure, might need to be reworked in to their own repositories in order to keep the backend logic a little more secret when the application is published for the customers to use.
+Usage of back-end, jump to part Back-end documentation.
+
+## Contributing MapFox
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Contributing should be done alongside the technologies currently used, but feel free to contact us with request of changes.
+
+## Getting Started with the frontend
 
 ### Step 0
 
@@ -51,17 +65,33 @@ expo start
 
 ### Step 2
 
-Open app with your mobile device by reading the QR-code from expo CLI console or use an emulator, hot reload works for the front-end, so the changes can be seen changing in real time.
+Open app with your mobile device by reading the QR-code from expo CLI console or use an emulator, hot reload works for the front-end, so the changes can be seen changing in real time. Your frontend should be now all set.
 
-## Folder structure
 
-There are separate folders for the front-end with and backend.
-The folder structure, might need to be reworked in to their own repositories in order to keep the backend logic a little more secret when the application is published for the customers to use.
-Usage of back-end, jump to part Back-end documentation.
+## Getting Started with the Backend
 
-## Contributing MapFox
+Clone or download this project
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Contributing should be done alongside the technologies currently used, but feel free to contact us with request of changes.
+```bash
+git clone https://github.com/mjHarakka/mapfox/
+```
+
+navigate to MapFox directory:
+
+```bash
+cd mapfox_backend
+```
+run
+
+```bash
+npm install
+node index.js
+```
+(This might come handy in developing the backend https://www.npmjs.com/package/nodemon)
+
+### Step 2
+
+Open the mapfox_backend file on your code editor and start editing, the default port is `8000` and you can use the same endpoints that the one one serverside uses by simply just removing the ip address and replacing it with `localhost:8000`, for example `localhost:8000/events`.
 
 # Back-end documentation
 
