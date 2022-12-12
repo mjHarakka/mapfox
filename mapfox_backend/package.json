@@ -27,7 +27,7 @@
     "dotenv": "^8.2.0",
     "errorhandler": "^1.5.1",
     "errorlogger": "^1.0.1",
-    "express": "4.17.1",
+    "express": "4.17.3",
     "kcors": "^2.2.2",
     "koa": "^2.11.0",
     "koa-router": "^8.0.8",
